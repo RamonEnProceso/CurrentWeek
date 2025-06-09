@@ -8,6 +8,41 @@
 <body>
     <h1 id="week_today">Semana</h1>
     <h2 id="week_left">Semanas que quedan</h2>
+
+    <button type="button" id="add_new_counter" onclick="add_new_counter()">+ Agregar Contador</button>
+
+    <form id="new_counter_display" style="display: none;">
+
+        <button type="button" id="new_counter_display_X" onclick="cancel_new_counter()">X</button>
+
+        <fieldset id="new_counter_first_section">
+            <label>Nombre del Contador: </label>
+            <input type="text" name="new_counter_name" id="new_counter_name">
+        </fieldset>
+
+        <fieldset id="new_counter_second_section">
+            <label>Fecha: </label>
+            <input type="date" name="new_counter_date" id="new_counter_date">
+        </fieldset>
+
+        <fieldset id="new_counter_third_section">
+            <legend>Tipo de contador:</legend>
+            <div>
+                <input type="radio" name="new_counter_type" value="time" id="new_counter_type_time">
+                <label for="time">Tiempo</label>
+            </div>
+            <div>
+                <input type="radio" name="new_counter_type" value="day" id="new_counter_type_day">
+                <label for="day">Días</label>
+            </div>
+            <div>
+                <input type="radio" name="new_counter_type" value="week" id="new_counter_type_week" checked>
+                <label for="week">Semanas</label>
+            </div>
+        </fieldset>
+        <button type="button" id="new_counter_finish">Agregar</button>
+    </form>
+
     <script src="script.js"></script>
 </body>
 </html>
