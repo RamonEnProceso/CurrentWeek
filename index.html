@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semana Del Año</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1 id="week_today">Semana</h1>
-    <h2 id="week_left">Semanas que quedan</h2>
+    <h1 id="week_today" class="current_week">Semana</h1>
+    <h2 id="week_left" class = "week_left">Semanas que quedan</h2>
 
-    <button type="button" id="add_new_counter" onclick="open_new_counter()">+ Agregar Contador</button>
+    <button class="button_new_counter" type="button" id="add_new_counter" onclick="open_new_counter()">+ Agregar Contador</button>
 
     <!--Esto es el form para añadir un nuevo contador-->
-    <form id="new_counter_display" style="display: none;">
-
-        <button type="button" id="new_counter_display_X" onclick="close_new_counter()">X</button>
+    <div class="display_box_content">
+    <form class="new_counter_form" id="new_counter_display" style="display: none;">
+        <div class="new_counter_box" id="new_counter_box">
+        <button class="button_close_new_counter" type="button" id="new_counter_display_X"  onclick="close_new_counter()">X</button>
 
         <fieldset id="new_counter_first_section">
             <label for="new_counter_name">Nombre del Contador: </label>
@@ -22,27 +24,35 @@
         </fieldset>
 
         <fieldset id="new_counter_second_section" style="display: none;">
+            <div class="new_counter_section">
             <label for="new_counter_date">Fecha: </label>
             <input type="datetime-local" name="new_counter_date" id="new_counter_date" oninput="display_next_section()">
+            </div>
         </fieldset>
 
         <fieldset id="new_counter_third_section" style="display: none;">
+            <div class="new_counter_section">
             <legend>Tipo de contador:</legend>
-            <div>
-                <input type="radio" name="new_counter_type" value="time" id="new_counter_type_time">
-                <label for="new_counter_type_time">Horas</label>
-            </div>
-            <div>
-                <input type="radio" name="new_counter_type" value="day" id="new_counter_type_day">
-                <label for="new_counter_type_day">Días</label>
-            </div>
-            <div>
-                <input type="radio" name="new_counter_type" value="week" id="new_counter_type_week" checked>
-                <label for="new_counter_type_week">Semanas</label>
+                <div class="new_counter_section_radios_box">
+                <div>
+                    <input type="radio" name="new_counter_type" value="hour" id="new_counter_type_time">
+                    <label for="new_counter_type_time">Horas</label>
+                </div>
+                <div>
+                    <input type="radio" name="new_counter_type" value="day" id="new_counter_type_day">
+                    <label for="new_counter_type_day">Días</label>
+                </div>
+                <div>
+                    <input type="radio" name="new_counter_type" value="week" id="new_counter_type_week" checked>
+                    <label for="new_counter_type_week">Semanas</label>
+                </div>
+                </div>
             </div>
         </fieldset>
         <button type="button" id="new_counter_finish" onclick="add_counter()">Agregar</button>
+        </div>
     </form>
+    </div>
     <!--Esto es el form para añadir un nuevo contador-->
 
     <!--Acá se almacenan los contadores del usuario-->

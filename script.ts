@@ -9,6 +9,7 @@ const counter_container = document.getElementById("counters_container") as HTMLE
 var counters_data : object[] = [];
 
 //Form Sections
+const add_new_counter_box = document.getElementById("new_counter_box") as HTMLElement;
 const add_new_counter_section_one = document.getElementById("new_counter_first_section") as HTMLElement;
 const add_new_counter_section_second = document.getElementById("new_counter_second_section") as HTMLElement;
 const add_new_counter_section_third = document.getElementById("new_counter_third_section") as HTMLElement;
@@ -33,14 +34,11 @@ const calculate_time_passed = (date: (Date),type) =>{
     let time_passed : number = 0
 
     if (type==="day"){
-    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000); //Días que pasaron desde cierta fecha
-    };
+    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000)}; //Días que pasaron desde cierta fecha;
     if (type==="week"){
-    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000/7); //Días que pasaron desde cierta fecha
-    };
-    if (type==="time"){
-    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000*24); //Días que pasaron desde cierta fecha
-    }
+    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000/7)}; //Días que pasaron desde cierta fecha};
+    if (type==="hour"){
+    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000*24)}; //Días que pasaron desde cierta fecha
     
     return time_passed
 } 
@@ -50,11 +48,12 @@ const calculate_time_passed = (date: (Date),type) =>{
 const render_counters = () => {
     let counter_container_data :string = "";
     for(let i = 0; i < counters_data.length; i++){
-        counter_container_data += `<div><p><span class="counter_name">Nombre: ${counters_data[i]["name"]}</span>
-            <br><span class="counter_type">${counters_data[i]["display"]}</span>
-            <br><span class="counter_date">Fecha: ${counters_data[i]["date"]}</span>
-            </p></div>`;
-
+        counter_container_data += `
+            <div class="counter_box">
+            <p class="counter_name">${counters_data[i]["name"]}</p>
+            <p class="counter_display"><span class="counter_number">${counters_data[i]["display"]}</span>  <span class="counter_type">${counters_data[i]["type"]}</span></p>
+            <p class="counter_date">${counters_data[i]["date"].toLocaleString("es-AR", {dateStyle: "medium", timeStyle: "short"})}</p>
+            </div>`;
     };
     counter_container.innerHTML = counter_container_data;
 }
@@ -88,6 +87,7 @@ const display_next_section = () =>{
 //Cierra o abre el form
 const open_new_counter =()=>{
     add_new_counter_form.style.display = "contents";
+    // Acá es para iniciar una animacion que todavia no hice add_new_counter_box.style.transform = "scale(1)";
     display_next_section();
 }
 const close_new_counter = () =>{
@@ -103,22 +103,24 @@ const add_counter = () => {
     const type_checked = document.querySelector('input[name="new_counter_type"]:checked') as HTMLInputElement;
     const type_counter : string = type_checked.value;
 
+    const time_passed = calculate_time_passed(date_counter,type_counter);
 
-    const counter: object = {"name":name_counter, "date":date_counter,"type":type_counter, "display": calculate_time_passed(date_counter,type_counter)}
+    if (name_counter &&  add_new_counter_date.value.trim() !== "" ){
 
+        const counter: object = {"name":name_counter, "date":date_counter,"type":type_counter, "display": time_passed}
+    
+        counters_data.push(counter)
+        //Actualiza el contenedor de Contadores
+        render_counters();
+        //Cierra el formulario
+        close_new_counter();
 
-    counters_data.push(counter)
-
-    console.log(counters_data[0]["name"])
-
-    //Actualiza el contenedor de Contadores
-    render_counters();
-
-    //Cierra el formulario
-    close_new_counter();
-
+    } else {
+        alert("Faltan datos. Por favor, verifique su ingreso");
+    }
 }
 
 
-week_display.innerHTML = `Estás en la semana <span style="display: block;">${current_week}</span> del año`;
-week_display_left.textContent = `Quedan ${weeks_left} semanas para terminar el año`;
+//Acá se establece la semana de título
+week_display.innerHTML = `Estás en la semana <span style="display: block;">${current_week}</span> de ${today_date.getFullYear()}`;
+week_display_left.innerHTML  = `Quedan <span>${weeks_left}</span> semanas para terminar el año`;
