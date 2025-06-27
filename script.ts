@@ -6,7 +6,7 @@ const add_new_counter_form = document.getElementById("new_counter_display") as H
 const counter_container = document.getElementById("counters_container") as HTMLElement;
 
 
-var counters_data : object[] = [];
+var counters : object[] = [];
 
 //Form Sections
 const add_new_counter_box = document.getElementById("new_counter_box") as HTMLElement;
@@ -20,10 +20,11 @@ const add_new_counter_type = document.querySelector('input[name="new_counter_typ
 
 //Variables
 const today_date: Date = new Date(); //Día de hoy
-const current_year: Date = new Date(today_date.getFullYear(),0,1); //Fecha de comienzo del año
+const current_year: Date = new Date(today_date.getFullYear(), 0, 1); //Fecha de comienzo del año
+const day_of_week = current_year.getDay(); //Día en que comenzó el año
 const year_has_53: boolean = current_year.getDay() === 5; //Verificar si tiene 53 semanas
-const days_passed: number = Math.round((today_date.getTime() - current_year.getTime() +1)/86400000); //Días que pasaron desde que comenzó el año
-const current_week: number = Math.round(days_passed/7); //Semanas que pasaron
+const days_passed: number = Math.floor((today_date.getTime() - current_year.getTime()) / 86400000); //Días que pasaron desde que comenzó el año
+const current_week: number = Math.ceil((days_passed + ((day_of_week + 6) % 7) + 1) / 7);; //Semanas que pasaron
 const weeks_left: number = year_has_53? 53 - current_week: 52 - current_week; //Semanas que quedan
 
 //Funciones
@@ -34,11 +35,11 @@ const calculate_time_passed = (date: (Date),type) =>{
     let time_passed : number = 0
 
     if (type==="day"){
-    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000)}; //Días que pasaron desde cierta fecha;
+    time_passed = Math.floor((today_date.getTime() - date.getTime() +1)/86400000)}; //Días que pasaron desde cierta fecha;
     if (type==="week"){
-    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000/7)}; //Días que pasaron desde cierta fecha};
+    time_passed = Math.floor((today_date.getTime() - date.getTime() +1)/86400000/7)}; //Días que pasaron desde cierta fecha};
     if (type==="hour"){
-    time_passed = Math.round((today_date.getTime() - date.getTime() +1)/86400000*24)}; //Días que pasaron desde cierta fecha
+    time_passed = Math.floor((today_date.getTime() - date.getTime() +1)/86400000*24)}; //Días que pasaron desde cierta fecha
     
     return time_passed
 } 
@@ -47,12 +48,12 @@ const calculate_time_passed = (date: (Date),type) =>{
 //Cargar contadores del usuario
 const render_counters = () => {
     let counter_container_data :string = "";
-    for(let i = 0; i < counters_data.length; i++){
+    for(let i = 0; i < counters.length; i++){
         counter_container_data += `
             <div class="counter_box">
-            <p class="counter_name">${counters_data[i]["name"]}</p>
-            <p class="counter_display"><span class="counter_number">${counters_data[i]["display"]}</span>  <span class="counter_type">${counters_data[i]["type"]}</span></p>
-            <p class="counter_date">${counters_data[i]["date"].toLocaleString("es-AR", {dateStyle: "medium", timeStyle: "short"})}</p>
+            <p class="counter_name">${counters[i]["name"]}</p>
+            <p class="counter_display"><span class="counter_number">${counters[i]["display"]}</span>  <span class="counter_type">${counters[i]["type"]}</span></p>
+            <p class="counter_date">${counters[i]["date"].toLocaleString("es-AR", {dateStyle: "medium", timeStyle: "short"})}</p>
             </div>`;
     };
     counter_container.innerHTML = counter_container_data;
@@ -109,7 +110,7 @@ const add_counter = () => {
 
         const counter: object = {"name":name_counter, "date":date_counter,"type":type_counter, "display": time_passed}
     
-        counters_data.push(counter)
+        counters.push(counter)
         //Actualiza el contenedor de Contadores
         render_counters();
         //Cierra el formulario
@@ -122,5 +123,5 @@ const add_counter = () => {
 
 
 //Acá se establece la semana de título
-week_display.innerHTML = `Estás en la semana <span style="display: block;">${current_week}</span> de ${today_date.getFullYear()}`;
-week_display_left.innerHTML  = `Quedan <span>${weeks_left}</span> semanas para terminar el año`;
+week_display.innerHTML = `Estás en la semana <span class="text-[70px]" style="display: block;">${current_week}</span> de ${today_date.getFullYear()}`;
+week_display_left.innerHTML  = `Quedan <span class="text-xl">${weeks_left}</span> semanas para terminar el año`;

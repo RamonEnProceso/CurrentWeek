@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semana Del Año</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-    <h1 id="week_today" class="current_week">Semana</h1>
-    <h2 id="week_left" class = "week_left">Semanas que quedan</h2>
+<body class="flex flex-col items-center">
+    <div>
+        <h1 id="week_today" class="current_week text-[30px] text-center m-6">Semana</h1>
+        <h2 id="week_left" class = "text-lg text-center">Semanas que quedan</h2>
+    </div>
 
-    <button class="button_new_counter" type="button" id="add_new_counter" onclick="open_new_counter()">+ Agregar Contador</button>
+    <button class="
+    w-48 h-10 m-10 rounded-lg shadow-md text-amber-50 bg-[var(--btn_color)]
+    hover:bg-[var(--btn_color_hover)] hover:scale-105 hover:cursor-pointer transition-all"  type="button" id="add_new_counter;" 
+    onclick="open_new_counter()">+ Agregar Contador</button>
 
     <!--Esto es el form para añadir un nuevo contador-->
-    <div class="display_box_content">
+    <div class="display_box_content w-full h-full justify-center items-center flex">
     <form class="new_counter_form" id="new_counter_display" style="display: none;">
         <div class="new_counter_box" id="new_counter_box">
         <button class="button_close_new_counter" type="button" id="new_counter_display_X"  onclick="close_new_counter()">X</button>
