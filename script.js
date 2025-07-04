@@ -4,7 +4,6 @@ var week_display_left = document.getElementById("week_left");
 var add_new_counter_button = document.getElementById("add_new_counter");
 var add_new_counter_form = document.getElementById("new_counter_display");
 var counter_container = document.getElementById("counters_container");
-var counters_data = [];
 //Form Sections
 var add_new_counter_box = document.getElementById("new_counter_box");
 var add_new_counter_section_one = document.getElementById("new_counter_first_section");
@@ -18,8 +17,10 @@ var today_date = new Date(); //Día de hoy
 var current_year = new Date(today_date.getFullYear(), 0, 1); //Fecha de comienzo del año
 var year_has_53 = current_year.getDay() === 5; //Verificar si tiene 53 semanas
 var days_passed = Math.round((today_date.getTime() - current_year.getTime() + 1) / 86400000); //Días que pasaron desde que comenzó el año
-var current_week = Math.round(days_passed / 7); //Semanas que pasaron
+var current_week = Math.floor(days_passed / 7) + 1; //Semanas que pasaron
 var weeks_left = year_has_53 ? 53 - current_week : 52 - current_week; //Semanas que quedan
+var counter_count = 0;
+var counters_data = localStorage.getItem('counters') ? JSON.parse(localStorage.getItem('counters')) : [];
 //Funciones
 //Calcular cuanto tiempo paso dependiendo el tipo
 var calculate_time_passed = function (date, type) {
@@ -42,7 +43,7 @@ var calculate_time_passed = function (date, type) {
 var render_counters = function () {
     var counter_container_data = "";
     for (var i = 0; i < counters_data.length; i++) {
-        counter_container_data += "\n            <div class=\"counter_box\">\n            <p class=\"counter_name\">".concat(counters_data[i]["name"], "</p>\n            <p class=\"counter_display\"><span class=\"counter_number\">").concat(counters_data[i]["display"], "</span>  <span class=\"counter_type\">").concat(counters_data[i]["type"], "</span></p>\n            <p class=\"counter_date\">").concat(counters_data[i]["date"].toLocaleString("es-AR", { dateStyle: "medium", timeStyle: "short" }), "</p>\n            </div>");
+        counter_container_data += "\n            <div class=\"counter_box\" id=\"counter_box_".concat(counters_data[i]["id"], "\">\n            <p class=\"counter_name\">").concat(counters_data[i]["name"], "</p>\n            <p class=\"counter_display\"><span class=\"counter_number\">").concat(counters_data[i]["display"], "</span>  <span class=\"counter_type\">").concat(counters_data[i]["type"], "</span></p>\n            <p class=\"counter_date\">").concat(counters_data[i]["date"].toLocaleString("es-AR", { dateStyle: "medium", timeStyle: "short" }), "</p>\n            <button class=\"delete_button\" id=\"counter_delete_").concat(counters_data[i]["id"], "\">X</button>\n            </div>");
     }
     ;
     counter_container.innerHTML = counter_container_data;
@@ -85,10 +86,19 @@ var add_counter = function () {
     var type_counter = type_checked.value;
     var time_passed = calculate_time_passed(date_counter, type_counter);
     if (name_counter && add_new_counter_date.value.trim() !== "") {
-        var counter = { "name": name_counter, "date": date_counter, "type": type_counter, "display": time_passed };
+        var counter = {
+            "id": "".concat(counter_count),
+            "name": name_counter,
+            "date": date_counter,
+            "type": type_counter,
+            "display": time_passed
+        };
+        counter_count += 1;
         counters_data.push(counter);
         //Actualiza el contenedor de Contadores
         render_counters();
+        //Actualiza la memoria local
+        localStorage.setItem('counters', JSON.stringify(counters_data));
         //Cierra el formulario
         close_new_counter();
     }
@@ -96,6 +106,7 @@ var add_counter = function () {
         alert("Faltan datos. Por favor, verifique su ingreso");
     }
 };
+render_counters();
 //Acá se establece la semana de título
 week_display.innerHTML = "Est\u00E1s en la semana <span style=\"display: block;\">".concat(current_week, "</span> de ").concat(today_date.getFullYear());
 week_display_left.innerHTML = "Quedan <span>".concat(weeks_left, "</span> semanas para terminar el a\u00F1o");
