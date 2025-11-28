@@ -1,0 +1,85 @@
+.current_week_card{
+    position: relative;
+    display: flex;
+    background-color: var(--primary-color);
+    justify-content: space-between;
+    padding: 15px 30px;
+    width: 330px;
+    border-radius: 25px;
+    border: 3px solid var(--secondary-color);
+    transition: transform 0.1s;
+    cursor: pointer;
+    user-select: none;
+
+    margin-bottom: 32px;
+}
+
+.current_week_card:active{
+    transform: scale(0.99);
+    transition: transform 0ms;
+}
+
+.current_week_card_left_part, .current_week_card_right_part{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.current_week_card_left_part{
+    align-items: flex-start;
+}
+
+.current_week_card_left_part p.full_date{
+    font-size: 16px;
+}
+
+.current_week_card_left_part p:not(.full_date){
+    font-size: 36px;
+    line-height: 36px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.current_week_card_right_part{
+    width: 70px;
+    align-items: center;
+}
+
+.current_week_card_right_part .week{
+    font-size: 50px;
+    line-height: 50px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.current_week_card_right_part .year{
+    font-size: 16px;
+}
+
+.current_week_card_right_part:after{
+    position: absolute;
+    content: "";
+    background-color: white;
+    height: 111px;
+    width: 3px;
+    left: -40%;
+}
+
+.separator{
+    content: "";
+    background-color: var(--separator);
+    width: 100%;
+    height: 3px;
+    left: 0;
+    bottom: -34px;
+}
+
+@media (min-width: 600px){
+    .current_week_card:hover{
+        transform: scale(1.02);
+    }
+    .current_week_card:active{
+    transform: scale(0.99);
+    }
+}

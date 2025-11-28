@@ -1,0 +1,15 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary-color: #C31632;
+    --secondary-color: #F14252;
+    --status-urgent-tag: #F14252;
+    --status-urgent-tag-border: #C31632;
+    --card-urgent-background: #FDCED0;
+    --card-urgent-border: #FBA6A9;
+    --separator:#FDCED0;
+}
