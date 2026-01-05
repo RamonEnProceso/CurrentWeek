@@ -1,5 +1,6 @@
 import style from "./Tasks.module.css"
 import { Task } from "../../models/Task"
+import DisplayDifference from "./TasksDifference"
 
 const Tasks = ({tasks, onSelectTask}:{tasks: Task[], onSelectTask:(task:Task)=>void}) =>{
     return<>
@@ -13,7 +14,7 @@ const Tasks = ({tasks, onSelectTask}:{tasks: Task[], onSelectTask:(task:Task)=>v
                     <div><span>{task.status}</span></div>
                 </div>
                 <div>
-                    <div>{String(task.finalDate)}</div>
+                    <DisplayDifference date={task.finalDate}></DisplayDifference>
                 </div>
             </li>
         }): <p style={{color:"black"}}>-- No hay tareas disponibles --</p>

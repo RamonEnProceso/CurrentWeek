@@ -1,4 +1,4 @@
-import getDates from "../../logic/getDates";
+import {getDates} from "../../logic/getDates";
 import style from "./CurrentWeek.module.css"
 
 const CurrentWeekCard = () =>{

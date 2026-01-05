@@ -1,5 +1,5 @@
 import { Task } from "../../models/Task";
-import { useState} from "react";
+import { useState } from "react";
 import style from "./Panel.module.css"
 
 const Panel = ({addTask,updateTask,activeTask,deleteTask,closePanel}:{
@@ -14,11 +14,12 @@ const Panel = ({addTask,updateTask,activeTask,deleteTask,closePanel}:{
         activeTask ?? {
             id: crypto.randomUUID(),
             title: "",
-            description:"",
             status: "todo",
             finalDate: ""
         }
     )
+
+
 
     return <>
     <div className={style.panel}>
@@ -31,20 +32,22 @@ const Panel = ({addTask,updateTask,activeTask,deleteTask,closePanel}:{
             closePanel()
         } }
         >
-            <button type="button" onClick={closePanel}>X</button>
+            <button type="button" onClick={closePanel} className={style.close}>X</button>
             {
-                activeTask && <button onClick={()=>{deleteTask(taskDraft.id);closePanel()}}>Borrar</button>
+                activeTask && <button type="button" onClick={()=>{deleteTask(taskDraft.id);closePanel()}}>Borrar</button>
             }
             
+            <div className={style.inputBlock}>
             <label htmlFor="name">Nombre</label>
             <input required id="name" type="text" value={taskDraft.title} onChange={(e)=>setTaskDraft({...taskDraft, title: e.target.value})}></input>
-            
-            <label htmlFor="description">Descripción</label>
-            <input type="text" id="description" value={taskDraft.description} onChange={(e)=>setTaskDraft({...taskDraft, description: e.target.value})}></input>
-            
+            </div>
+
+
+            <div className={style.inputBlock}>
             <label htmlFor="date">Caduca el:</label>
             <input required type="date" id="date" value={taskDraft.finalDate} onChange={(e)=>setTaskDraft({...taskDraft, finalDate: e.target.value})}></input>
-            
+            </div>
+
             <fieldset>
                 <legend>Estado:</legend>
                 <label>
