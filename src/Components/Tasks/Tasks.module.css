@@ -1,9 +1,131 @@
-.taskTitle{
+.taskList{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.taskSectionTitle{
     color: var(--secondary-color);
     text-align: left;
     margin: 20px 0;
 }
 
-.taskItem{
-    background-color: black;
+
+.taskContainer{
+    background-color: var(--card-color);
+    color: var(--status-urgent-tag-border);
+    border-radius: 20px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-around;
+    border: 3px solid var(--card-urgent-border);
+    cursor: pointer;
+
+    transition: transform 0.1s;
+}
+
+.taskLeftSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 170px;
+    margin-left: -20px;
+    
+}
+
+.taskTitle{
+    max-width: 140px;
+    text-align: start;
+    font-weight: bold;
+}
+
+.taskLeftSide span{
+    display: block;
+}
+
+
+.taskStatus{
+    font-size: 13px;
+    font-weight: bold;
+    
+    padding: 0px 9px;
+    margin: 10px 0 0 0;
+    border: 3px solid var(--status-urgent-tag-border);
+    background-color: var(--status-urgent-tag);
+    color: white;
+    border-radius: 20px;
+}
+
+.taskRightSide{
+    display: flex;
+    width: 100px;
+    align-items: center;
+    margin-right: -45px;
+}
+
+.taskNumberContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: var(--card-urgent-background);
+    border: 3px solid var(--card-urgent-border);
+    border-radius: 20px;
+}
+
+.doing .taskContainer .taskRightSide .taskNumberContainer{
+    border-color: var(--card-doing-border);
+    background-color: var(--card-doing-background);
+}
+
+.doing .taskContainer{
+    color: var(--card-doing-font);
+    border-color: var(--card-doing-border);
+}
+
+.doing .taskContainer .taskLeftSide .taskStatus{
+    background-color: var(--status-doing-tag);
+    border-color: var(--status-doing-tag-border);
+}
+
+.done .taskContainer .taskRightSide .taskNumberContainer{
+    border-color: var(--card-done-border);
+    background-color: var(--card-done-background);
+}
+
+.done .taskContainer{
+    color: var(--card-done-font);
+    border-color: var(--card-done-border);
+}
+
+.done .taskContainer .taskLeftSide .taskStatus{
+    background-color: var(--status-done-tag);
+    border-color: var(--status-done-tag-border);
+}
+
+.taskNumber{
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.taskNumberType{
+    font-size: 13px;
+}
+
+.taskExpiredIcon{
+    font-size:40px;
+    text-shadow: 0 2px 3px;
+}
+
+@media (min-width: 600px){
+    .taskContainer:hover{
+        transform: scale(1.03);
+    }
+    .taskContainer:active{
+    transform: scale(0.99);
+    }
 }

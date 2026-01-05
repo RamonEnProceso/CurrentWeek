@@ -7,12 +7,30 @@
 :root{
     --primary-color: #C31632;
     --secondary-color: #F14252;
+
     --status-urgent-tag: #F14252;
     --status-urgent-tag-border: #C31632;
     --card-urgent-background: #FDCED0;
     --card-urgent-border: #FBA6A9;
+
+    --status-doing-tag:#E98517;
+    --status-doing-tag-border:#CE6211;
+    --card-doing-font:#CE6211;
+    --card-doing-border: #F1AE42;
+    --card-doing-background: #FBECCA;
+
+    --status-done-tag:#459C3A;
+    --status-done-tag-border:#3A8A2F;
+    --card-done-font:#295724;
+    --card-done-border: #459C3A;
+    --card-done-background: #A0DD98;
+
+
     --separator:#FDCED0;
+
     --background-color:#ffe9e9;
+    --card-color:#ffff;
+
     --font-color:black;
     --font-color-a:white;
 }

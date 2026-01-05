@@ -44,7 +44,14 @@ export const getDates = (): CurrenDateInfo => {
 };
 
 export const getDifference = (date: string): Difference => {
-  const finalDate = new Date(date);
+  const isoDateOnly = /^\d{4}-\d{2}-\d{2}$/.test(date);
+  const finalDate = isoDateOnly
+    ? ((): Date => {
+        const [y, m, d] = date.split("-").map(Number);
+        return new Date(y, m - 1, d);
+      })()
+    : new Date(date);
+
   const today = new Date();
 
   const difference = finalDate.getTime() - today.getTime();

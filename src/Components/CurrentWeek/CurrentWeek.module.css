@@ -8,8 +8,6 @@
     border-radius: 25px;
     border: 3px solid var(--secondary-color);
     transition: transform 0.1s;
-    cursor: pointer;
-    user-select: none;
 
     margin-bottom: 32px;
 }
@@ -44,6 +42,7 @@
 .current_week_card_right_part{
     width: 70px;
     align-items: center;
+    margin-right: -10px;
 }
 
 .current_week_card_right_part .week{
@@ -63,7 +62,7 @@
     background-color: white;
     height: 111px;
     width: 3px;
-    left: -40%;
+    left: -30%;
 }
 
 .separator{
@@ -75,6 +74,7 @@
     bottom: -34px;
 }
 
+/*
 @media (min-width: 600px){
     .current_week_card:hover{
         transform: scale(1.02);
@@ -83,3 +83,4 @@
     transform: scale(0.99);
     }
 }
+*/

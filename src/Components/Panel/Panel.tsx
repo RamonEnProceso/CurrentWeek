@@ -1,6 +1,7 @@
 import { Task } from "../../models/Task";
 import { useState } from "react";
-import style from "./Panel.module.css"
+import trashIcon from "../../assets/Trash_icon.webp";
+import style from "./Panel.module.css";
 
 const Panel = ({addTask,updateTask,activeTask,deleteTask,closePanel}:{
     addTask:(task: Task)=>void,
@@ -34,7 +35,7 @@ const Panel = ({addTask,updateTask,activeTask,deleteTask,closePanel}:{
         >
             <button type="button" onClick={closePanel} className={style.close}>X</button>
             {
-                activeTask && <button type="button" onClick={()=>{deleteTask(taskDraft.id);closePanel()}}>Borrar</button>
+                activeTask && <button type="button" className={style.buttonTrash} onClick={()=>{deleteTask(taskDraft.id);closePanel()}}><img src={trashIcon}></img></button>
             }
             
             <div className={style.inputBlock}>
@@ -55,12 +56,12 @@ const Panel = ({addTask,updateTask,activeTask,deleteTask,closePanel}:{
                     onChange={(e) => setTaskDraft({ ...taskDraft, status: e.target.value as Task["status"] })}></input>
                     <span>Por Hacer</span>
                 </label>
-                <label>
+                <label className={style.doing}>
                     <input type="radio" name="status" value="doing" checked={taskDraft.status === "doing"}  
                     onChange={(e) => setTaskDraft({ ...taskDraft, status: e.target.value as Task["status"] })}></input>
                     <span>Haciendo</span>
                 </label>
-                <label>
+                <label className={style.done}>
                     <input type="radio" name="status" value="done" checked={taskDraft.status === "done"}  
                     onChange={(e) => setTaskDraft({ ...taskDraft, status: e.target.value as Task["status"] })}></input>
                     <span>Hecho</span>
