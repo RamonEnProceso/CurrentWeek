@@ -4,3 +4,16 @@
   padding: 2rem;
   text-align: center;
 }
+
+@media (max-width: 600px){
+    body{
+      display: flex;
+      
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    #root{
+      transform: scale(0.8);
+    }
+}
