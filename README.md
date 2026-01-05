@@ -28,4 +28,4 @@ Estructura preparada para localizaciones (hay archivos en.json y es.json).
 
 ## 📷 Capturas
 
-<span style="display:flex;justify-content:center">![[CurrentWeekCaptura1.webp]]</span>
+![Vista principal de CurrentWeek](CurrentWeekCaptura1.webp)
