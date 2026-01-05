@@ -29,3 +29,10 @@ Estructura preparada para localizaciones (hay archivos en.json y es.json).
 ## 📷 Capturas
 
 ![Vista principal de CurrentWeek](CurrentWeekCaptura1.webp)
+
+---
+
+## 🔑 Licencia
+
+Este proyecto se distribuye bajo una licencia de uso no comercial con atribución.
+Ver archivo LICENSE para más información.

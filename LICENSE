@@ -1,0 +1,37 @@
+Copyright (c) 2026 Ramón
+
+Licencia de Uso No Comercial con Atribución
+
+Se concede permiso para usar, copiar y modificar este software, siempre que se cumplan las siguientes condiciones:
+
+1. ATRIBUCIÓN
+   Toda copia, modificación o trabajo derivado debe incluir créditos visibles al autor original:
+   Ramón — proyecto "CurrentWeek".
+   Los créditos deben figurar en:
+
+- El repositorio
+- La documentación
+- O la interfaz visible si el proyecto es distribuido públicamente
+
+2. USO NO COMERCIAL
+   Este software NO puede ser vendido, sublicenciado, ni utilizado con fines comerciales.
+   Esto incluye, pero no se limita a:
+
+- Venta directa del software
+- Inclusión en productos pagos
+- Uso en servicios o plataformas con monetización
+
+3. MODIFICACIONES
+   Se permiten modificaciones siempre que:
+
+- Se mantenga esta misma licencia
+- Se conserven los créditos al autor original
+
+4. SIN GARANTÍA
+   Este software se proporciona "tal cual", sin garantía de ningún tipo.
+   El autor no será responsable por daños derivados de su uso.
+
+5. TECNOLOGÍA
+   Esta licencia aplica independientemente de que el proyecto esté desarrollado en React u otras tecnologías.
+
+Al usar este software, aceptás automáticamente los términos de esta licencia.
