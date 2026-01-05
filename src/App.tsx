@@ -4,11 +4,18 @@ import Tasks from "./Components/Tasks/Tasks"
 import CurrentWeek from './Components/CurrentWeek/CurrentWeek'
 import AddTaskButton from './Components/Buttons/AddTask'
 import Panel from './Components/Panel/Panel'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function App() {
   
-  const [tasks,setTasks] = useState<Task[]>([]);
+  const [tasks,setTasks] = useState<Task[]>(() => {
+    try {
+      const stored = localStorage.getItem('tasks');
+      return stored ? JSON.parse(stored) as Task[] : [];
+    } catch {
+      return [];
+    }
+  });
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
@@ -36,6 +43,14 @@ function App() {
   const closePanel = ()=>{
     setIsPanelOpen(false)
   }
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    } catch {
+      //
+    }
+  }, [tasks]);
   
 
   return (
@@ -44,7 +59,7 @@ function App() {
       <Tasks tasks={tasks} onSelectTask={handleSelectTask}/>
       <AddTaskButton setActiveTask={()=> {setActiveTask(null); setIsPanelOpen(true)}}></AddTaskButton>
       {
-        isPanelOpen && <Panel addTask={addTask} activeTask={activeTask} updateTask={updateTask} deleteTask={deleteTask} closePanel={closePanel}></Panel>
+        isPanelOpen && <Panel key={activeTask ? activeTask.id : 'new'} addTask={addTask} activeTask={activeTask} updateTask={updateTask} deleteTask={deleteTask} closePanel={closePanel}></Panel>
       }
     </>
   )

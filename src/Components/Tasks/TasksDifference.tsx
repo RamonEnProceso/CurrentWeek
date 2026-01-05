@@ -7,7 +7,8 @@ const DisplayDifference = ({date}:{date:string}) => {
   if (objDifference.weeksDifference < 1) {
     if (objDifference.daysDifference < 2) {
       if (objDifference.difference < 0) {
-        return "💀";
+        return <div>💀
+        </div>;
       }
       return <div>
         {objDifference.hoursDifference}
